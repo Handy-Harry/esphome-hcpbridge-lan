@@ -8,6 +8,8 @@
 
 This contribution is intended to use with a wt32-eth01, to be able to connect it via a LAN cable without using WiFi.
 
+![Home Assistant Device Overview](docs/593714077_max.jpg)
+
 This is a esphome-based adaption of the adaption of the HCPBridge. Credits for the initial development of the HCPBridge go to [mapero](https://github.com/mapero/esphome-hcpbridge), [Gifford47](https://github.com/Gifford47/HCPBridgeMqtt), [hkiam](https://github.com/hkiam/HCPBridge) and all the other guys contributed.
 
 
