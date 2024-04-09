@@ -16,7 +16,7 @@ This is a esphome-based adaption of the HCPBridge. Credits for the initial devel
 esphome:
   name: hcpbridge
   libraries:
-    - emelianov/modbus-esp8266 # Required for communication with the modbus
+    - emelianov/modbus-esp8266
   platformio_options:
     board_build.f_cpu: 240000000L
     board_build.flash_mode: qio
@@ -27,16 +27,18 @@ esphome:
 
 external_components:
     source: github://mapero/esphome-hcpbridge
-    refresh: 0s # Ensure you always get the latest version
+    refresh: 0s
 
 esp32:
-  board: adafruit_feather_esp32s3
+  board: wt32-eth01
   framework:
     type: arduino
 
 hcpbridge:
-  is_connected: # Sensor to display the connection status to the motor
+  is_connected:
     name: "HCPBridge Connected"
+  rx_pin: 3 # optional, default=18
+  tx_pin: 1 # optional, default=17
 
 cover:
   - platform: hcpbridge
@@ -46,12 +48,30 @@ switch:
   - platform: hcpbridge
     name: Garage Light
 
-# API to communicate with home assistant
 api:
   encryption:
     key: !secret api_key
 
-# Enable OTA updates
+web_server:
+  port: 80
+  auth:
+    username: !secret web_username
+    password: !secret web_password
+
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  clk_mode: GPIO0_IN
+  phy_addr: 1
+  power_pin: GPIO16
+
+# Enable logging
+logger:
+  level: DEBUG
+  baud_rate: 9600
+
+# Example configuration entry
 ota:
   safe_mode: true
 ```
